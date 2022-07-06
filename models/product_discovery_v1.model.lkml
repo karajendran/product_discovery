@@ -1,5 +1,8 @@
 connection: "looker-retailshared"
 
+# include the dashboard
+include: "/dashboards/Most_Viewed.dashboard.lookml"
+
 # include all the views
 include: "/views/**/*.view"
 

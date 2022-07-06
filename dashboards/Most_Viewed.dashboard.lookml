@@ -1,5 +1,5 @@
-- dashboard: most_viewed
-  title: Most Viewed
+- dashboard: most_viewed_products
+  title: Most Viewed Products
   layout: newspaper
   preferred_viewer: dashboards-next
   tile_size: 100
