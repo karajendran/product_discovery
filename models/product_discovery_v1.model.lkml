@@ -1,7 +1,7 @@
 connection: "looker-retailshared"
 
 # include the dashboard
-include: "/dashboards/Most_Viewed.dashboard.lookml"
+include: "/dashboards/*.dashboard.lookml"
 
 # include all the views
 include: "/views/**/*.view"
@@ -115,3 +115,7 @@ explore: tbl_stop_words {}
 explore: most_viewed_product{}
 
 explore: most_viewed_product_by_cat{}
+
+explore: abandonment_rate {}
+
+explore: most_searched_product {}
