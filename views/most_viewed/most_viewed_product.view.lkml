@@ -1,27 +1,21 @@
 view: most_viewed_product {
   derived_table: {
     sql:
-    With ViewTable as
-    (Select prd_id, day, visitor
-    FROM `retail.mv_detail_page_view`),
-    ProdTable as
-    (Select id, description
-    FROM `retail.tbl_products`)
-
-    SELECT prd_id, day, visitor, description, COUNT(*) as view_count
-    FROM ProdTable
-    JOIN ViewTable on prd_id = id
-    GROUP BY 1,2,3,4
-    ORDER BY 5 DESC;;
+    SELECT d.product.id as sku, t2.title as title, COUNT(d) as total
+    FROM `retail-shared-demos.retail.tbl_events`, UNNEST(product_details) as d
+    JOIN `retail-shared-demos.retail.tbl_products` t2 ON d.product.id = t2.id
+    WHERE event_type = 'search' AND ARRAY_LENGTH(product_details) > 0
+    GROUP BY d.product.id, t2.title
+    ORDER BY total desc;;
   }
-  dimension: product_id {
+  dimension: sku {
     type: string
-    sql: ${TABLE}.prd_id ;;
+    sql: ${TABLE}.sku ;;
   }
 
-  dimension: product_name {
+  dimension: title {
     type: string
-    sql: ${TABLE}.description ;;
+    sql: ${TABLE}.title ;;
   }
   measure: count {
     hidden: no
@@ -29,12 +23,12 @@ view: most_viewed_product {
     drill_fields: [detail*]
   }
 
-  dimension: view_count {
+  measure: view_count {
     type: number
-    sql: ${TABLE}.view_count ;;
+    sql: ${TABLE}.total ;;
   }
 
   set: detail {
-    fields: [product_id, product_name]
+    fields: [sku,title,view_count]
   }
 }
