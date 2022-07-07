@@ -15,7 +15,7 @@ view: tbl_products {
   }
 
   dimension: categories {
-    hidden: yes
+    hidden: no
     sql: ${TABLE}.categories ;;
   }
 

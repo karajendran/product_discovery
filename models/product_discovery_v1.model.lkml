@@ -1,7 +1,7 @@
 connection: "looker-retailshared"
 
 # include the dashboard
-include: "/dashboards/*.dashboard.lookml"
+include: "/dashboards/Product_Discovery_Dashboards.dashboard.lookml"
 
 # include all the views
 include: "/views/**/*.view"
@@ -70,6 +70,8 @@ explore: mv_sessions_stats {}
 explore: mv_add_to_cart {}
 
 explore: mv_detail_page_view {}
+
+
 
 explore: tbl_products {
   join: tbl_products__sizes {
