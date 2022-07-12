@@ -1,14 +1,15 @@
-#products that are most showed in  search results
-
-view: most_searched_product {
+view: most_viewed_product_ids {
   derived_table: {
     sql:
-    SELECT d.product.id as sku, t2.title as title, COUNT(d) as total
+    WITH
+  total_product_search_results AS (
+    SELECT d.product.id as sku, COUNT(d) as total
     FROM `retail-shared-demos.retail.tbl_events`, UNNEST(product_details) as d
-    JOIN `retail-shared-demos.retail.tbl_products` t2 ON d.product.id = t2.id
-    WHERE event_type = 'search' AND ARRAY_LENGTH(product_details) > 0
-    GROUP BY d.product.id, t2.title
-    ORDER BY total desc;;
+    WHERE event_type = 'detail-page-view' AND ARRAY_LENGTH(product_details) > 0
+    GROUP BY d.product.id
+    ORDER BY total desc
+  )
+  SELECT FORMAT("%'.2i", SUM(total)) AS total_items_returned_over_period from total_product_search_results;;
   }
   dimension: sku {
     type: string

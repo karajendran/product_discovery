@@ -19,6 +19,7 @@ view: mv_search {
 
   dimension: query {
     type: string
+    primary_key: yes
     sql: ${TABLE}.query ;;
   }
 

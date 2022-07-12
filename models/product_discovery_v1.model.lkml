@@ -113,19 +113,24 @@ explore: tbl_products {
 
 explore: tbl_stop_words {}
 
-#Most Viewed Products
-explore: most_viewed_product{}
 
-explore: prod_map {}
-
-explore: most_viewed_product_by_cat{}
-
-explore: abandonment_rate {}
-
+#P0: 3 - Most Searched Products
 explore: most_searched_product {}
-
-explore: most_searched_product_new {}
 
 explore: most_searched_product_category {}
 
+explore: most_searched_product_ids {}
+
+
+#P0: 4 - Most Viewed Products
+explore: most_viewed_product{}
+
 explore: most_viewed_product_category {}
+
+explore: most_viewed_product_ids {}
+
+
+explore: prod_map {}
+
+#P0: 8 - Abandonment rate
+explore: abandonment_rate {}

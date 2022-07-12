@@ -1,4 +1,4 @@
-view: most_searched_product_category {
+view: most_viewed_product_category {
   derived_table: {
     sql: WITH res_table AS (WITH prod_map AS (SELECT
           tbl_products.id  AS id,
@@ -11,7 +11,7 @@ view: most_searched_product_category {
       SELECT d.product.id as sku, t2.title as title, t2.tbl_products__categories as categories, COUNT(d) as total
       FROM `retail-shared-demos.retail.tbl_events`, UNNEST(product_details) as d
       JOIN prod_map t2 ON d.product.id = t2.id
-      WHERE event_type = 'search' AND ARRAY_LENGTH(product_details) > 0
+      WHERE event_type = 'detail-page-view' AND ARRAY_LENGTH(product_details) > 0
       GROUP BY 1,2,3
       )
       select categories, SUM(total) as search_count
@@ -24,6 +24,7 @@ view: most_searched_product_category {
   measure: count {
     type: count
     drill_fields: [detail*]
+    hidden: yes
   }
 
   dimension: categories {
