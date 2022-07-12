@@ -534,7 +534,6 @@
     type: looker_grid
     fields: [best_performing_product.sku, best_performing_product.sales]
     sorts: [best_performing_product.sales desc]
-    limit: 500
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -590,6 +589,7 @@
     defaults_version: 1
     hidden_fields: []
     series_types: {}
+    refresh: 1 hour
     listen: {}
     row: 12
     col: 16
