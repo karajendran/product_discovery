@@ -47,7 +47,7 @@
     hidden_fields: [most_searched_product.sku]
     refresh: 1 hour
     listen: {}
-    row: 6
+    row: 18
     col: 0
     width: 8
     height: 6
@@ -93,7 +93,7 @@
     series_types: {}
     refresh: 1 hour
     listen: {}
-    row: 6
+    row: 18
     col: 8
     width: 8
     height: 6
@@ -179,8 +179,8 @@
     truncate_column_names: false
     refresh: 1 hour
     listen: {}
-    row: 18
-    col: 0
+    row: 6
+    col: 16
     width: 8
     height: 6
   - title: Top Viewed Products
@@ -225,7 +225,7 @@
     listen:
       Time Filter: mv_detail_page_view.day_date
     row: 0
-    col: 16
+    col: 8
     width: 8
     height: 6
   - title: Most Searched Product Categories
@@ -276,7 +276,7 @@
     series_types: {}
     refresh: 1 hour
     listen: {}
-    row: 0
+    row: 12
     col: 0
     width: 8
     height: 6
@@ -321,7 +321,7 @@
     series_types: {}
     refresh: 1 hour
     listen: {}
-    row: 0
+    row: 12
     col: 8
     width: 8
     height: 6
@@ -401,8 +401,8 @@
     refresh: 1 hour
     listen:
       Time Filter: mv_search.day_date
-    row: 6
-    col: 16
+    row: 0
+    col: 0
     width: 8
     height: 6
   - title: Most Searched Keywords
@@ -447,7 +447,7 @@
     refresh: 1 hour
     listen:
       Time Filter: mv_search.day_date
-    row: 12
+    row: 6
     col: 0
     width: 8
     height: 6
@@ -523,7 +523,7 @@
     refresh: 1 hour
     listen:
       Time Filter: mv_search.day_date
-    row: 12
+    row: 6
     col: 8
     width: 8
     height: 6
@@ -591,7 +591,7 @@
     series_types: {}
     refresh: 1 hour
     listen: {}
-    row: 12
+    row: 0
     col: 16
     width: 8
     height: 6

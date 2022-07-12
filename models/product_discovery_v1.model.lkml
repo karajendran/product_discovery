@@ -138,3 +138,5 @@ explore: best_performing_product{}
 
 #P0: 8 - Abandonment rate
 explore: abandonment_rate {}
+
+explore: test{}
