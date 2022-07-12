@@ -132,5 +132,9 @@ explore: most_viewed_product_ids {}
 
 explore: prod_map {}
 
+
+#P0: 6 - Best & Worst Performing Products
+explore: best_performing_product{}
+
 #P0: 8 - Abandonment rate
 explore: abandonment_rate {}
