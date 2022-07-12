@@ -116,8 +116,16 @@ explore: tbl_stop_words {}
 #Most Viewed Products
 explore: most_viewed_product{}
 
+explore: prod_map {}
+
 explore: most_viewed_product_by_cat{}
 
 explore: abandonment_rate {}
 
 explore: most_searched_product {}
+
+explore: most_searched_product_new {}
+
+explore: most_searched_product_category {}
+
+explore: most_viewed_product_category {}
