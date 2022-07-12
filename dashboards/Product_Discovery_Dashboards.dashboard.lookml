@@ -180,7 +180,7 @@
     refresh: 1 hour
     listen: {}
     row: 12
-    col: 0
+    col: 8
     width: 8
     height: 6
   - title: Top Viewed Products
@@ -403,6 +403,51 @@
       Time Filter: mv_search.day_date
     row: 6
     col: 16
+    width: 8
+    height: 6
+  - title: Most Searched Keywords
+    name: Most Searched Keywords
+    model: product_discovery_v1
+    explore: mv_search
+    type: looker_grid
+    fields: [mv_search.query, mv_search.count]
+    sorts: [mv_search.count desc]
+    limit: 500
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '14'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    series_labels:
+      mv_search.query: Search Term
+      mv_search.count: Count
+    series_cell_visualizations:
+      mv_search.count:
+        is_active: true
+    series_text_format:
+      mv_search.query: {}
+    header_font_color: "#9334E6"
+    header_background_color: "#12B5CB"
+    defaults_version: 1
+    refresh: 1 hour
+    listen:
+      Time Filter: mv_search.day_date
+    row: 12
+    col: 0
     width: 8
     height: 6
   filters:
