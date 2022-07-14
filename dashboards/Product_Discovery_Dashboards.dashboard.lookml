@@ -179,7 +179,7 @@
     truncate_column_names: false
     refresh: 1 hour
     listen: {}
-    row: 6
+    row: 18
     col: 16
     width: 8
     height: 6
@@ -534,6 +534,7 @@
     type: looker_grid
     fields: [best_performing_product.sku, best_performing_product.sales]
     sorts: [best_performing_product.sales desc]
+    total: true
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -591,6 +592,93 @@
     series_types: {}
     refresh: 1 hour
     listen: {}
+    row: 6
+    col: 16
+    width: 8
+    height: 6
+
+  - title: Conversion Rate from Session Stats
+    name: Conversion Rate from Session Stats
+    model: product_discovery_v1
+    explore: mv_sessions_stats
+    type: looker_grid
+    fields: [mv_sessions_stats.cnt_detail_page, mv_sessions_stats.cnt_add_cart, mv_sessions_stats.cnt_purchased,
+      mv_sessions_stats.cnt_purchased_products, mv_sessions_stats.converted, mv_sessions_stats.cnt_search]
+    sorts: [mv_sessions_stats.cnt_detail_page, mv_sessions_stats.cnt_add_cart, mv_sessions_stats.cnt_purchased,
+      mv_sessions_stats.cnt_purchased_products, mv_sessions_stats.converted]
+    total: true
+    dynamic_fields: [{table_calculation: detail_page_view, label: Detail Page View,
+        expression: 'sum(${mv_sessions_stats.cnt_detail_page})', value_format: !!null '',
+        value_format_name: !!null '', _kind_hint: dimension, _type_hint: number},
+      {table_calculation: add_to_cart, label: Add to Cart, expression: 'sum(${mv_sessions_stats.cnt_add_cart})',
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: dimension,
+        _type_hint: number}, {table_calculation: purchase, label: Purchase, expression: 'sum(${mv_sessions_stats.cnt_purchased})',
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: dimension,
+        _type_hint: number}, {table_calculation: converted, label: Converted, expression: 'sum(${mv_sessions_stats.converted})',
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: dimension,
+        _type_hint: number}, {table_calculation: search, label: Search, expression: 'sum(${mv_sessions_stats.cnt_search})',
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: dimension,
+        _type_hint: number}]
+    show_view_names: false
+    show_row_numbers: false
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: true
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '14'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: true
+    limit_displayed_rows_values:
+      show_hide: show
+      first_last: first
+      num_rows: '1'
+    header_font_color: "#9334E6"
+    header_background_color: "#12B5CB"
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    show_null_points: true
+    interpolation: linear
+    hidden_fields: [mv_sessions_stats.cnt_detail_page, mv_sessions_stats.cnt_add_cart,
+      mv_sessions_stats.cnt_purchased, mv_sessions_stats.cnt_purchased_products, mv_sessions_stats.converted,
+      mv_sessions_stats.cnt_search]
+    refresh: 1 hour
+    listen:
+      Time Filter: mv_sessions_stats.day_date
     row: 0
     col: 16
     width: 8
