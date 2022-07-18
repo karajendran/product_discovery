@@ -1,10 +1,10 @@
-- dashboard: ecommerce
+- dashboard: ecommerce_dashboard
   title: Ecommerce Dashboard
   layout: newspaper
   preferred_viewer: dashboards-next
-  tile_size: 100
-  description: 'Ecommerce Dashboard'
+  description: Ecommerce Dashboard
   refresh: 1 hour
+  preferred_slug: ZLhCDVTxY6JDzOPusXX5xP
   elements:
   - title: Conversion/Abandonment Rate
     name: Conversion/Abandonment Rate
@@ -48,14 +48,14 @@
     x_axis_label: Event
     show_dropoff: true
     defaults_version: 1
-    refresh: 1 hour
     note_state: collapsed
     note_display: below
     note_text: From Events Flat table
+    refresh: 1 hr
     listen:
       Time Filter: mv_events_flat.event_date
-    row: 6
-    col: 16
+    row: 0
+    col: 8
     width: 8
     height: 6
   - title: Conversion Rate
@@ -141,14 +141,14 @@
     comparison_type: value
     comparison_reverse_colors: false
     show_comparison_label: true
-    refresh: 1 hour
     note_state: collapsed
     note_display: below
     note_text: From Events Flat table
+    refresh: 1 hr
     listen:
       Time Filter: mv_events_flat.event_date
     row: 0
-    col: 16
+    col: 0
     width: 8
     height: 6
   filters:
