@@ -69,9 +69,15 @@ explore: mv_sessions_stats {}
 
 explore: mv_add_to_cart {}
 
+explore: mv_add_to_cart_v2 {
+  join: mv_add_to_cart_v2__categories {
+    view_label: "Mv Add To Cart V2: Categories"
+    sql: LEFT JOIN UNNEST(${mv_add_to_cart_v2.categories}) as mv_add_to_cart_v2__categories ;;
+    relationship: one_to_many
+  }
+}
+
 explore: mv_detail_page_view {}
-
-
 
 explore: tbl_products {
   join: tbl_products__sizes {
