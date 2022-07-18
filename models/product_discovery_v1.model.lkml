@@ -1,7 +1,7 @@
 connection: "looker-retailshared"
 
 # include the dashboard
-include: "/dashboards/Product_Discovery_Dashboards.dashboard.lookml"
+include: "/dashboards/*.dashboard.lookml"
 
 # include all the views
 include: "/views/**/*.view"
