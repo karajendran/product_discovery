@@ -146,3 +146,6 @@ explore: best_performing_product{}
 explore: abandonment_rate {}
 
 explore: test{}
+
+#sales forecast
+explore: sales_forecast {}
