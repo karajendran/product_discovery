@@ -5,7 +5,6 @@
   tile_size: 100
   description: 'Ecommerce Dashboard'
   refresh: 1 hour
-  preferred_slug: 5GNAWje1wucVeHfLZW0Bwl
   elements:
   - title: Conversion/Abandonment Rate
     name: Conversion/Abandonment Rate
