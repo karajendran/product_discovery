@@ -149,3 +149,5 @@ explore: test{}
 
 #sales forecast
 explore: sales_forecast {}
+
+explore: total_sales {}

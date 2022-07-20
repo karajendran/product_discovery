@@ -72,7 +72,7 @@
     refresh: 1 hour
     listen: {}
     row: 0
-    col: 0
+    col: 8
     width: 8
     height: 6
   - title: Total sales by SKU
@@ -116,6 +116,54 @@
     listen:
       Time Filter: tbl_events.event_date
     row: 6
+    col: 0
+    width: 8
+    height: 6
+  - title: Sales Forecast
+    name: Sales Forecast
+    model: product_discovery_v1
+    explore: sales_forecast
+    type: looker_line
+    fields: [sales_forecast.ts_date, sales_forecast.history_value, sales_forecast.forecast_value,
+      sales_forecast.prediction_interval_lower_bound, sales_forecast.prediction_interval_upper_bound]
+    fill_fields: [sales_forecast.ts_date]
+    sorts: [sales_forecast.ts_date desc]
+    x_axis_gridlines: true
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: monotone
+    y_axes: [{label: Total Sales Amount in $, orientation: left, series: [{axisId: sales_forecast.history_value,
+            id: sales_forecast.history_value, name: History Value}, {axisId: sales_forecast.forecast_value,
+            id: sales_forecast.forecast_value, name: Forecast Value}, {axisId: sales_forecast.prediction_interval_lower_bound,
+            id: sales_forecast.prediction_interval_lower_bound, name: Prediction Interval
+              Lower Bound}, {axisId: sales_forecast.prediction_interval_upper_bound,
+            id: sales_forecast.prediction_interval_upper_bound, name: Prediction Interval
+              Upper Bound}], showLabels: true, showValues: true, valueFormat: '',
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
+    series_types: {}
+    defaults_version: 1
+    listen: {}
+    row: 0
     col: 0
     width: 8
     height: 6

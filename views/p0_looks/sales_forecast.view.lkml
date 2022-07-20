@@ -39,23 +39,23 @@ view: sales_forecast {
     sql: ${TABLE}.ts ;;
   }
 
-  dimension: history_value {
-    type: number
+  measure: history_value {
+    type: sum
     sql: ${TABLE}.history_value ;;
   }
 
-  dimension: forecast_value {
-    type: number
+  measure: forecast_value {
+    type: sum
     sql: ${TABLE}.forecast_value ;;
   }
 
-  dimension: prediction_interval_lower_bound {
-    type: number
+  measure: prediction_interval_lower_bound {
+    type: sum
     sql: ${TABLE}.prediction_interval_lower_bound ;;
   }
 
-  dimension: prediction_interval_upper_bound {
-    type: number
+  measure: prediction_interval_upper_bound {
+    type: sum
     sql: ${TABLE}.prediction_interval_upper_bound ;;
   }
 
