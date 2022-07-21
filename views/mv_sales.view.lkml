@@ -71,4 +71,14 @@ view: mv_sales {
     type: count
     drill_fields: []
   }
+
+  measure: shipping {
+    type: number
+    sql: ${tx_total} -${product_total}-${tx_tax} ;;
+  }
+  measure: liability {
+    type: number
+    sql: ${tx_tax}+${shipping} ;;
+  }
+
 }
