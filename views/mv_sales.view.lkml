@@ -2,8 +2,8 @@ view: mv_sales {
   sql_table_name: `retail.mv_sales`
     ;;
 
-  dimension: basket_size {
-    type: number
+  measure: basket_size {
+    type: sum
     sql: ${TABLE}.basket_size ;;
   }
 
@@ -22,8 +22,8 @@ view: mv_sales {
     sql: ${TABLE}.day ;;
   }
 
-  dimension: product_total {
-    type: number
+  measure: product_total {
+    type: sum
     sql: ${TABLE}.product_total ;;
   }
 
@@ -47,13 +47,13 @@ view: mv_sales {
     sql: ${TABLE}.tx_id ;;
   }
 
-  dimension: tx_tax {
-    type: number
+  measure: tx_tax {
+    type: sum
     sql: ${TABLE}.tx_tax ;;
   }
 
-  dimension: tx_total {
-    type: number
+  measure: tx_total {
+    type: sum
     sql: ${TABLE}.tx_total ;;
   }
 
