@@ -154,4 +154,9 @@ view: tbl_events__product_details {
     hidden: yes
     sql: tbl_events__product_details ;;
   }
+
+  measure: total_sales {
+    type: number
+    sql: ${quantity}*${product__price} ;;
+  }
 }
