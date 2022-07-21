@@ -109,8 +109,8 @@ view: tbl_events__product_details {
     group_item_label: "ID"
   }
 
-  dimension: product__price {
-    type: number
+  measure: product__price {
+    type: sum
     sql: ${TABLE}.product.price ;;
     group_label: "Product"
     group_item_label: "Price"
@@ -144,8 +144,8 @@ view: tbl_events__product_details {
     sql: ${TABLE}.product.price_expire_time ;;
   }
 
-  dimension: quantity {
-    type: number
+  measure: quantity {
+    type: sum
     sql: quantity ;;
   }
 
@@ -156,6 +156,6 @@ view: tbl_events__product_details {
   }
   measure: total_sales {
     type: number
-    sql: ${tbl_events__product_details.quantity}*${tbl_events__product_details.product__price} ;;
+    sql: ${quantity} * ${product__price} ;;
   }
 }
