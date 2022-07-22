@@ -10,7 +10,9 @@ view: most_viewed_product {
     GROUP BY d.product.id, t2.title
     ORDER BY total desc;;
   }
+
   dimension: sku {
+    primary_key: yes
     type: string
     sql: ${TABLE}.sku ;;
   }

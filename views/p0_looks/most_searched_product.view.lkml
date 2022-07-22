@@ -11,6 +11,7 @@ view: most_searched_product {
     ORDER BY total desc;;
   }
   dimension: sku {
+    primary_key: yes
     type: string
     sql: ${TABLE}.sku ;;
   }

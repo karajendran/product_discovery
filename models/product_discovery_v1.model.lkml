@@ -13,6 +13,7 @@ datagroup: product_discovery_v1_default_datagroup {
 
 persist_with: product_discovery_v1_default_datagroup
 
+
 explore: tbl_events {
   join: tbl_events__product_details {
     view_label: "Tbl Events: Product Details"
@@ -80,6 +81,22 @@ explore: mv_add_to_cart_v2 {
 explore: mv_detail_page_view {}
 
 explore: tbl_products {
+  label: "Products"
+  group_label: "Products"
+  view_label: "Products"
+
+  join: most_viewed_product {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${tbl_products.id} = ${most_viewed_product.sku} ;;
+  }
+
+  join: most_searched_product {
+    type: left_outer
+    relationship: one_to_many
+    sql_on: ${tbl_products.id} = ${most_searched_product.sku} ;;
+  }
+
   join: tbl_products__sizes {
     view_label: "Tbl Products: Sizes"
     sql: LEFT JOIN UNNEST(${tbl_products.sizes}) as tbl_products__sizes ;;
@@ -93,7 +110,7 @@ explore: tbl_products {
   }
 
   join: tbl_products__brands {
-    view_label: "Tbl Products: Brands"
+    view_label: "Products"
     sql: LEFT JOIN UNNEST(${tbl_products.brands}) as tbl_products__brands ;;
     relationship: one_to_many
   }
@@ -136,7 +153,7 @@ explore: most_viewed_product_category {}
 explore: most_viewed_product_ids {}
 
 
-explore: prod_map {}
+# explore: prod_map {}
 
 
 #P0: 6 - Best & Worst Performing Products

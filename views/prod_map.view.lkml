@@ -7,6 +7,8 @@ view: prod_map {
     }
   }
   dimension: id {
+    label: "SKU"
+    primary_key: yes
     description: "product sku"
   }
   dimension: title {

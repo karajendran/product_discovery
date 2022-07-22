@@ -2,6 +2,94 @@ view: tbl_events {
   sql_table_name: `retail.tbl_events`
     ;;
 
+  ##### PERIOD OVER PERIOD ANALYSIS ####
+
+  parameter: period {
+    label: "Timeframe"
+    view_label: "Period over Period"
+    type: unquoted
+    allowed_value: {
+      label: "Week to Date"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Month to Date"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Quarter to Date"
+      value: "Quarter"
+    }
+    allowed_value: {
+      label: "Year to Date"
+      value: "Year"
+    }
+    default_value: "Period"
+  }
+
+  # To get start date we need to get either first day of the year, month or quarter
+  dimension: first_date_in_period {
+    view_label: "Period over Period"
+    datatype: date
+    type: date
+    hidden: no
+    sql: DATE_TRUNC(CURRENT_DATE(), {% parameter period %});;
+  }
+
+  #Now get the total number of days in the period
+  dimension: days_in_period {
+    view_label: "Period over Period"
+    type: number
+    hidden: no
+    sql: DATE_DIFF(CURRENT_DATE(),${first_date_in_period}, DAY) ;;
+  }
+
+  #Now get the first date in the prior period
+  dimension: first_date_in_prior_period {
+    view_label: "Period over Period"
+    datatype: date
+    type: date
+    hidden: no
+    sql: DATE_TRUNC(DATE_ADD(CURRENT_DATE(), INTERVAL -1 {% parameter period %}),{% parameter period %});;
+  }
+
+  #Now get the last date in the prior period
+  dimension: last_date_in_prior_period {
+    datatype: date
+    view_label: "Period over Period"
+    type: date
+    hidden: no
+    sql: DATE_ADD(${first_date_in_prior_period}, INTERVAL ${days_in_period} DAY) ;;
+  }
+
+  # Now figure out which period each date belongs in
+  dimension: period_selected {
+    view_label: "Period over Period"
+    type: string
+    sql:
+        CASE
+          WHEN ${event_date} >=  ${first_date_in_period}
+          THEN 'This {% parameter period %} to Date'
+          WHEN ${event_date} >= ${first_date_in_prior_period}
+          AND ${event_date} <= ${last_date_in_prior_period}
+          THEN 'Prior {% parameter period %} to Date'
+          ELSE NULL
+          END ;;
+  }
+
+
+  dimension: days_from_period_start {
+    view_label: "Period over Period"
+    type: number
+    sql: CASE WHEN ${period_selected} = 'This {% parameter period %} to Date'
+          THEN DATE_DIFF(${event_date}, ${first_date_in_period}, DAY)
+          WHEN ${period_selected} = 'Prior {% parameter period %} to Date'
+          THEN DATE_DIFF(${event_date}, ${first_date_in_prior_period}, DAY)
+          ELSE NULL END;;
+  }
+
+  ##### DIMENSIONS ####
+
   dimension_group: event {
     type: time
     timeframes: [
@@ -19,6 +107,14 @@ view: tbl_events {
   dimension: event_type {
     type: string
     sql: ${TABLE}.event_type ;;
+  }
+
+  dimension: event_type_new {
+    type: string
+    sql: CASE WHEN ${event_type} = 'detail-page-view' THEN 'Product View'
+              WHEN ${event_type} =  'search' THEN 'Product Search'
+              ELSE 'Other'
+              END;;
   }
 
   dimension: product_details {
@@ -158,4 +254,6 @@ view: tbl_events__product_details {
     type: number
     sql: ${quantity} * ${product__price} ;;
   }
+
+
 }
