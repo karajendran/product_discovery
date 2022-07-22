@@ -47,12 +47,12 @@ view: mv_sales {
     sql: ${TABLE}.tx_id ;;
   }
 
-  measure: tx_tax {
+  measure: tax {
     type: sum
     sql: ${TABLE}.tx_tax ;;
   }
 
-  measure: tx_total {
+  measure: total_sales {
     type: sum
     sql: ${TABLE}.tx_total ;;
   }
@@ -72,13 +72,21 @@ view: mv_sales {
     drill_fields: []
   }
 
-  measure: shipping {
+  measure: shipping_and_discount {
     type: number
-    sql: ${tx_total} -${product_total}-${tx_tax} ;;
+    sql: ${total_sales} -${product_total}-${tax} ;;
   }
   measure: liability {
     type: number
-    sql: ${tx_tax}+${shipping} ;;
+    sql: ${tax}+${shipping_and_discount} ;;
+  }
+  measure: total_num_of_orders {
+    type: number
+    sql: count(${session}) ;;
+  }
+  measure: total_visitors {
+    type: number
+    sql: count(distinct(${visitor})) ;;
   }
 
 }

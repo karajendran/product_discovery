@@ -109,8 +109,8 @@ view: tbl_events__product_details {
     group_item_label: "ID"
   }
 
-  measure: product__price {
-    type: sum
+  dimension: product__price {
+    type: number
     sql: ${TABLE}.product.price ;;
     group_label: "Product"
     group_item_label: "Price"
