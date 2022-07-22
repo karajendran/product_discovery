@@ -1,5 +1,5 @@
 - dashboard: search
-  title: Search
+  title: Search  - Detailed Metrics
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
@@ -442,7 +442,6 @@
     col: 8
     width: 8
     height: 6
-
   filters:
   - name: Time Filter
     title: Time Filter

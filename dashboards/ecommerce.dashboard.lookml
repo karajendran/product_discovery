@@ -54,7 +54,7 @@
     refresh: 1 hr
     listen:
       Time Filter: mv_events_flat.event_date
-    row: 6
+    row: 12
     col: 8
     width: 8
     height: 6
@@ -147,12 +147,12 @@
     refresh: 1 hr
     listen:
       Time Filter: mv_events_flat.event_date
-    row: 6
+    row: 12
     col: 0
     width: 8
     height: 6
-  - title: New Tile
-    name: New Tile
+  - title: Total Number of Searches
+    name: Total Number of Searches
     model: product_discovery_v1
     explore: tbl_events
     type: single_value
@@ -334,6 +334,120 @@
     listen:
       Time Filter: mv_events_flat.event_date
     row: 0
+    col: 0
+    width: 8
+    height: 6
+  - title: Number Of Visitors
+    name: Number Of Visitors
+    model: product_discovery_v1
+    explore: mv_sales
+    type: single_value
+    fields: [mv_sales.total_visitors]
+    filters: {}
+    limit: 1000
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
+      palette_id: 5d189dfc-4f46-46f3-822b-bfb0b61777b1
+    custom_color: "#E52592"
+    single_value_title: Total Visitors
+    defaults_version: 1
+    series_types: {}
+    listen:
+      Time Filter: mv_sales.day_date
+    row: 0
+    col: 16
+    width: 8
+    height: 6
+  - title: Conversion rate
+    name: Conversion rate
+    model: product_discovery_v1
+    explore: search_to_sales
+    type: single_value
+    fields: [search_to_sales.search_to_sales_count]
+    filters: {}
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#A8A116"
+    single_value_title: Purchase from search results
+    defaults_version: 1
+    listen:
+      Time Filter: search_to_sales.day
+    row: 6
+    col: 16
+    width: 8
+    height: 6
+  - title: Add to cart rate
+    name: Add to cart rate
+    model: product_discovery_v1
+    explore: search_to_add_to_cart
+    type: single_value
+    fields: [search_to_add_to_cart.search_to_add_cart_count]
+    filters: {}
+    limit: 1000
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#A8A116"
+    single_value_title: Add-to-cart events occurring from Search results
+    defaults_version: 1
+    series_types: {}
+    listen:
+      Time Filter: search_to_add_to_cart.day
+    row: 6
+    col: 8
+    width: 8
+    height: 6
+  - title: Click-through rate
+    name: Click-through rate
+    model: product_discovery_v1
+    explore: search_to_detail_page_view
+    type: single_value
+    fields: [search_to_detail_page_view.search_to_detail_page_view_count]
+    filters: {}
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#A8A116"
+    single_value_title: Number of clicks from Search results
+    series_types: {}
+    defaults_version: 1
+    listen:
+      Time Filter: search_to_detail_page_view.day
+    row: 6
     col: 0
     width: 8
     height: 6

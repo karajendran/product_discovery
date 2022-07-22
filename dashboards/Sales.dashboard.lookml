@@ -51,8 +51,8 @@
     defaults_version: 1
     listen:
       Time Filter: sales_forecast.ts_date
-    row: 6
-    col: 16
+    row: 12
+    col: 0
     width: 8
     height: 6
   - title: Revenue vs Additional Liability
@@ -107,8 +107,8 @@
     defaults_version: 1
     listen:
       Time Filter: mv_sales.day_date
-    row: 12
-    col: 8
+    row: 6
+    col: 16
     width: 8
     height: 6
   - title: New Tile
@@ -289,9 +289,10 @@
     totals_color: "#808080"
     defaults_version: 1
     series_types: {}
-    listen: {}
-    row: 12
-    col: 0
+    listen:
+      Time Filter: mv_sales.day_date
+    row: 0
+    col: 16
     width: 8
     height: 6
   - title: Best Performing Products
@@ -335,8 +336,8 @@
     hidden_fields: [tbl_events.event_type, tbl_events__product_details.quantity, tbl_events__product_details.product__price]
     listen:
       Time Filter: tbl_events.event_date
-    row: 0
-    col: 16
+    row: 12
+    col: 8
     width: 8
     height: 6
   filters:

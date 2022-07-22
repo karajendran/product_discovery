@@ -151,3 +151,7 @@ explore: test{}
 explore: sales_forecast {}
 
 explore: total_sales {}
+
+explore: search_to_detail_page_view {} #Click-through rate
+explore: search_to_add_to_cart {} #Add to cart rate
+explore: search_to_sales {} #Conversion rate
