@@ -47,6 +47,11 @@ view: mv_search {
     type: string
     sql: ${TABLE}.visitor ;;
   }
+  #Number of visitors who searched
+  measure: total_visitors {
+    type: number
+    sql: count(distinct(${visitor})) ;;
+  }
 
   measure: count {
     type: count
