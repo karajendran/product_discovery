@@ -25,6 +25,7 @@ view: mv_sales {
   measure: product_total {
     type: sum
     sql: ${TABLE}.product_total ;;
+    value_format: "$#,##0.00"
   }
 
   dimension: session {
@@ -50,11 +51,14 @@ view: mv_sales {
   measure: tax {
     type: sum
     sql: ${TABLE}.tx_tax ;;
+    value_format: "$#,##0.00"
   }
 
+  #Per Transaction
   measure: total_sales {
     type: sum
     sql: ${TABLE}.tx_total ;;
+    value_format: "$#,##0.00"
   }
 
   dimension: user {
@@ -75,10 +79,12 @@ view: mv_sales {
   measure: shipping_and_discount {
     type: number
     sql: ${total_sales} -${product_total}-${tax} ;;
+    value_format: "$#,##0.00"
   }
   measure: liability {
     type: number
     sql: ${tax}+${shipping_and_discount} ;;
+    value_format: "$#,##0.00"
   }
   measure: total_num_of_orders {
     type: number
@@ -89,4 +95,10 @@ view: mv_sales {
     sql: count(distinct(${visitor})) ;;
   }
 
+  #Average Order Value
+  measure: AOV {
+    type: number
+    sql: ${mv_sales.total_sales}/${mv_sales.count} ;;
+    value_format: "$#,##0.00"
+  }
 }

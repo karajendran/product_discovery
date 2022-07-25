@@ -111,78 +111,8 @@
     col: 16
     width: 8
     height: 6
-  - title: New Tile
-    name: New Tile
-    model: product_discovery_v1
-    explore: mv_sales
-    type: single_value
-    fields: [mv_sales.total_sales]
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: true
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    color_application:
-      collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
-      palette_id: 5d189dfc-4f46-46f3-822b-bfb0b61777b1
-    custom_color: "#079c98"
-    single_value_title: Total Revenue
-    value_format: "$0.00"
-    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#1A73E8",
-        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
-          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
-        strikethrough: false, fields: !!null ''}]
-    defaults_version: 1
-    listen:
-      Time Filter: mv_sales.day_date
-    row: 0
-    col: 0
-    width: 8
-    height: 6
-  - title: New Tile
-    name: New Tile (2)
-    model: product_discovery_v1
-    explore: mv_sales
-    type: single_value
-    fields: [mv_sales.count, mv_sales.total_sales]
-    sorts: [mv_sales.total_sales desc]
-    limit: 1000
-    column_limit: 50
-    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${mv_sales.total_sales}/${mv_sales.count}",
-        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: true
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    color_application:
-      collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
-      palette_id: 5d189dfc-4f46-46f3-822b-bfb0b61777b1
-    custom_color: "#1A73E8"
-    single_value_title: Average order value (AOV)
-    value_format: "$0.00"
-    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#1A73E8",
-        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
-          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
-        strikethrough: false, fields: !!null ''}]
-    defaults_version: 1
-    hidden_fields: [mv_sales.tx_total, mv_sales.count, mv_sales.total_sales]
-    listen:
-      Time Filter: mv_sales.day_date
-    row: 0
-    col: 8
-    width: 8
-    height: 6
-  - title: New Tile
-    name: New Tile (3)
+  - title: Total Customers
+    name: Total Customers
     model: product_discovery_v1
     explore: mv_sales
     type: single_value
@@ -209,8 +139,8 @@
     col: 8
     width: 8
     height: 6
-  - title: New Tile
-    name: New Tile (4)
+  - title: Total No Of Purchases
+    name: Total No Of Purchases
     model: product_discovery_v1
     explore: mv_sales
     type: single_value
@@ -337,6 +267,67 @@
     listen:
       Time Filter: tbl_events.event_date
     row: 12
+    col: 8
+    width: 8
+    height: 6
+  - title: Total Revenue
+    name: Total Revenue
+    model: product_discovery_v1
+    explore: mv_sales
+    type: single_value
+    fields: [mv_sales.total_sales]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: progress_percentage
+    comparison_reverse_colors: false
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#A8A116"
+    single_value_title: Total Revenue
+    comparison_label: ''
+    defaults_version: 1
+    listen:
+      Time Filter: mv_sales.day_date
+    row: 0
+    col: 0
+    width: 8
+    height: 6
+  - title: AOV
+    name: AOV
+    model: product_discovery_v1
+    explore: mv_sales
+    type: single_value
+    fields: [mv_sales.AOV]
+    limit: 1000
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: true
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
+      palette_id: 5d189dfc-4f46-46f3-822b-bfb0b61777b1
+    custom_color: "#1A73E8"
+    single_value_title: Average order value (AOV)
+    value_format: "$0.00"
+    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#1A73E8",
+        font_color: !!null '', color_application: {collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2,
+          palette_id: 56d0c358-10a0-4fd6-aa0b-b117bef527ab}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    defaults_version: 1
+    hidden_fields: [mv_sales.tx_total]
+    listen:
+      Time Filter: mv_sales.day_date
+    row: 0
     col: 8
     width: 8
     height: 6

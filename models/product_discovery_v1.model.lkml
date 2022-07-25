@@ -134,9 +134,6 @@ explore: tbl_products {
   }
 }
 
-explore: tbl_stop_words {}
-
-
 #P0: 3 - Most Searched Products
 explore: most_searched_product {}
 
@@ -166,8 +163,6 @@ explore: test{}
 
 #sales forecast
 explore: sales_forecast {}
-
-explore: total_sales {}
 
 explore: search_to_detail_page_view {} #Click-through rate
 explore: search_to_add_to_cart {} #Add to cart rate
