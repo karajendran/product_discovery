@@ -101,4 +101,11 @@ view: mv_sales {
     sql: ${mv_sales.total_sales}/${mv_sales.count} ;;
     value_format: "$#,##0.00"
   }
+
+  #Average Order Sizs
+  measure: AOS {
+    type: number
+    sql: ${basket_size}/${count} ;;
+    value_format: "0"
+  }
 }
