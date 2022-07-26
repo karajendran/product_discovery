@@ -253,7 +253,6 @@ view: tbl_events__product_details {
   measure: total_sales {
     type: number
     sql: ${quantity} * ${product__price} ;;
+    value_format: "$#,##0.00"
   }
-
-
 }
