@@ -1,4 +1,4 @@
-- dashboard: Sales
+- dashboard: sales__conversions
   title: Sales & Conversions
   layout: newspaper
   preferred_viewer: dashboards-next
@@ -54,8 +54,8 @@
     defaults_version: 1
     listen:
       Time Filter: sales_forecast.ts_date
-    row: 18
-    col: 0
+    row: 12
+    col: 16
     width: 8
     height: 6
   - title: Revenue vs Additional Liability
@@ -138,7 +138,7 @@
     series_types: {}
     listen:
       Time Filter: mv_sales.day_date
-    row: 12
+    row: 18
     col: 8
     width: 8
     height: 6
@@ -163,8 +163,8 @@
     defaults_version: 1
     listen:
       Time Filter: mv_sales.day_date
-    row: 12
-    col: 16
+    row: 18
+    col: 0
     width: 8
     height: 6
   - title: 'Sales Analysis '
@@ -270,7 +270,7 @@
     listen:
       Time Filter: tbl_events.event_date
     row: 18
-    col: 8
+    col: 16
     width: 8
     height: 6
   - title: Total Revenue
@@ -505,6 +505,57 @@
       Time Filter: mv_events_flat.event_date
     row: 6
     col: 16
+    width: 8
+    height: 6
+  - title: Total Impressions
+    name: Total Impressions
+    model: product_discovery_v1
+    explore: mv_events_flat
+    type: looker_column
+    fields: [mv_events_flat.event_type, mv_events_flat.count]
+    filters:
+      mv_events_flat.event_type: detail-page-view,search,add-to-cart
+    sorts: [mv_events_flat.count desc]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: Session Count, orientation: left, series: [{axisId: mv_events_flat.count,
+            id: mv_events_flat.count, name: Mv Events Flat}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
+    x_axis_label: Event
+    show_dropoff: false
+    defaults_version: 1
+    note_state: collapsed
+    note_display: below
+    note_text: From Events Flat table
+    listen:
+      Time Filter: mv_events_flat.event_date
+    row: 12
+    col: 8
     width: 8
     height: 6
   filters:
