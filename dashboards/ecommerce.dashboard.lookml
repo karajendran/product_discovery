@@ -219,7 +219,7 @@
     listen:
       Time Filter: search_to_sales.day
     row: 6
-    col: 16
+    col: 8
     width: 8
     height: 6
   - title: Add to cart rate
@@ -246,7 +246,7 @@
     series_types: {}
     listen:
       Time Filter: search_to_add_to_cart.day
-    row: 6
+    row: 12
     col: 8
     width: 8
     height: 6
@@ -274,7 +274,7 @@
     defaults_version: 1
     listen:
       Time Filter: search_to_detail_page_view.day
-    row: 6
+    row: 18
     col: 0
     width: 8
     height: 6
@@ -299,8 +299,33 @@
     defaults_version: 1
     listen:
       Time Filter: mv_search.day_date
-    row: 0
-    col: 16
+    row: 12
+    col: 0
+    width: 8
+    height: 6
+  - title: Total Sales generated from Searches
+    name: Total Sales generated from Searches
+    model: product_discovery_v1
+    explore: search_to_sales
+    type: single_value
+    fields: [search_to_sales.total_sales]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#A8A116"
+    single_value_title: Total Sales generated from Searches
+    defaults_version: 1
+    listen:
+      Time Filter: search_to_sales.day
+    row: 6
+    col: 0
     width: 8
     height: 6
   filters:
