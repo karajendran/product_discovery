@@ -1,7 +1,7 @@
 #Conversion rate
 view: search_to_sales {
   derived_table: {
-    sql: SELECT (mv_sales.day),mv_sales.session
+    sql: SELECT (mv_sales.day),mv_sales.session, mv_sales.total_sales
       FROM `retail.mv_search` AS mv_search , `retail.mv_sales` AS mv_sales
       Where (mv_sales.day)=(mv_search.day ) and mv_sales.session = mv_search.session
        ;;
@@ -34,5 +34,11 @@ view: search_to_sales {
   measure: total_search_sessions {
     type:  number
     sql: select count(*) from `retail.mv_search`;;
+  }
+  #Per Transaction
+  measure: total_sales {
+    type: number
+    sql: ${TABLE}.total_sales ;;
+    value_format: "$#,##0.00"
   }
 }
