@@ -1,8 +1,10 @@
-- dashboard: search
+- dashboard: search___detailed_metrics
   title: Search  - Detailed Metrics
   layout: newspaper
   preferred_viewer: dashboards-next
-  description: ''
+  description: |-
+    Users: Category Manager / Marketing manager - a stakeholder in the organization responsible for sales and/or P&L of a group of products
+    Objective: Assess customer behavior wrt products, Track product performance, and identify trending products
   refresh: 1 hour
   preferred_slug: dbeazc51mJg32EkiT5mfiu
   elements:
@@ -317,7 +319,7 @@
     listen:
       Time Filter: mv_search.day_date
     row: 0
-    col: 0
+    col: 16
     width: 8
     height: 6
   - title: Most Searched Keywords
@@ -442,6 +444,130 @@
     col: 8
     width: 8
     height: 6
+  - title: New Tile
+    name: New Tile
+    model: product_discovery_v1
+    explore: tbl_products
+    type: looker_pie
+    fields: [most_viewed_product.view_count, tbl_products__categories.tbl_products__categories]
+    sorts: [most_viewed_product.view_count desc]
+    limit: 50
+    value_labels: legend
+    label_type: labPer
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    series_types: {}
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    show_null_points: true
+    interpolation: linear
+    map_plot_mode: points
+    heatmap_gridlines: false
+    heatmap_gridlines_empty: false
+    heatmap_opacity: 0.5
+    show_region_field: true
+    draw_map_labels_above_data: true
+    map_tile_provider: light
+    map_position: fit_data
+    map_scale_indicator: 'off'
+    map_pannable: true
+    map_zoomable: true
+    map_marker_type: circle
+    map_marker_icon_name: default
+    map_marker_radius_mode: proportional_value
+    map_marker_units: meters
+    map_marker_proportional_scale_type: linear
+    map_marker_color_mode: fixed
+    show_legend: true
+    quantize_map_value_colors: false
+    reverse_map_value_colors: false
+    listen: {}
+    row: 6
+    col: 16
+    width: 8
+    height: 6
+  - title: Best Performing Products
+    name: Best Performing Products
+    model: product_discovery_v1
+    explore: tbl_events
+    type: looker_grid
+    fields: [tbl_events.event_type, tbl_events__product_details.product__id, tbl_events__product_details.quantity,
+      tbl_events__product_details.product__price, tbl_events__product_details.total_sales]
+    filters:
+      tbl_events.event_type: purchase-complete
+    sorts: [tbl_events__product_details.total_sales desc]
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: editable
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '14'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
+      palette_id: 5d189dfc-4f46-46f3-822b-bfb0b61777b1
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    truncate_header: true
+    series_cell_visualizations:
+      tbl_events__product_details.total_sales:
+        is_active: true
+    header_font_color: "#9334E6"
+    header_background_color: "#12B5CB"
+    defaults_version: 1
+    hidden_fields: [tbl_events.event_type, tbl_events__product_details.quantity, tbl_events__product_details.product__price]
+    listen:
+      Time Filter: tbl_events.event_date
+    row: 0
+    col: 0
+    width: 8
+    height: 6
   filters:
   - name: Time Filter
     title: Time Filter
@@ -452,3 +578,4 @@
     ui_config:
       type: advanced
       display: popover
+      options: []
