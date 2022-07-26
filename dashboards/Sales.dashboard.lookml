@@ -1,4 +1,4 @@
-- dashboard: sales__conversions
+- dashboard: Sales
   title: Sales & Conversions
   layout: newspaper
   preferred_viewer: dashboards-next
@@ -54,7 +54,7 @@
     defaults_version: 1
     listen:
       Time Filter: sales_forecast.ts_date
-    row: 12
+    row: 18
     col: 16
     width: 8
     height: 6
@@ -110,7 +110,7 @@
     defaults_version: 1
     listen:
       Time Filter: mv_sales.day_date
-    row: 0
+    row: 6
     col: 16
     width: 8
     height: 6
@@ -226,51 +226,6 @@
       Time Filter: mv_sales.day_date
     row: 0
     col: 8
-    width: 8
-    height: 6
-  - title: Best Performing Products
-    name: Best Performing Products
-    model: product_discovery_v1
-    explore: tbl_events
-    type: looker_grid
-    fields: [tbl_events.event_type, tbl_events__product_details.product__id, tbl_events__product_details.quantity,
-      tbl_events__product_details.product__price, tbl_events__product_details.total_sales]
-    filters:
-      tbl_events.event_type: purchase-complete
-    sorts: [tbl_events__product_details.total_sales desc]
-    show_view_names: false
-    show_row_numbers: true
-    transpose: false
-    truncate_text: true
-    hide_totals: false
-    hide_row_totals: false
-    size_to_fit: true
-    table_theme: editable
-    limit_displayed_rows: false
-    enable_conditional_formatting: false
-    header_text_alignment: left
-    header_font_size: '14'
-    rows_font_size: '12'
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    color_application:
-      collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
-      palette_id: 5d189dfc-4f46-46f3-822b-bfb0b61777b1
-    show_sql_query_menu_options: false
-    show_totals: true
-    show_row_totals: true
-    truncate_header: true
-    series_cell_visualizations:
-      tbl_events__product_details.total_sales:
-        is_active: true
-    header_font_color: "#9334E6"
-    header_background_color: "#12B5CB"
-    defaults_version: 1
-    hidden_fields: [tbl_events.event_type, tbl_events__product_details.quantity, tbl_events__product_details.product__price]
-    listen:
-      Time Filter: tbl_events.event_date
-    row: 18
-    col: 16
     width: 8
     height: 6
   - title: Total Revenue
@@ -503,7 +458,7 @@
     note_text: From Events Flat table
     listen:
       Time Filter: mv_events_flat.event_date
-    row: 6
+    row: 12
     col: 16
     width: 8
     height: 6
@@ -556,6 +511,87 @@
       Time Filter: mv_events_flat.event_date
     row: 12
     col: 8
+    width: 8
+    height: 6
+  - title: Sales analysis new
+    name: Sales analysis new
+    model: product_discovery_v1
+    explore: mv_sales
+    type: looker_column
+    fields: [mv_sales.total_sales, mv_sales.product_total, mv_sales.shipping_and_discount,
+      mv_sales.tax]
+    filters:
+      mv_sales.day_date: 4 months
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: false
+    show_x_axis_ticks: false
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    color_application:
+      collection_id: 7c56cc21-66e4-41c9-81ce-a60e1c3967b2
+      palette_id: e34425a5-3228-4f76-b45d-2e7cd13a6766
+      options:
+        steps: 5
+    y_axes: [{label: '', orientation: bottom, series: [{axisId: mv_sales.total_sales,
+            id: mv_sales.total_sales, name: Total Sales}, {axisId: mv_sales.product_total,
+            id: mv_sales.product_total, name: Product Total}, {axisId: mv_sales.shipping_and_discount,
+            id: mv_sales.shipping_and_discount, name: Shipping and Discount}, {axisId: mv_sales.tax,
+            id: mv_sales.tax, name: Tax}], showLabels: false, showValues: true, unpinAxis: false,
+        tickDensity: default, tickDensityCustom: 5, type: linear}]
+    series_types: {}
+    leftAxisLabelVisible: false
+    leftAxisLabel: ''
+    rightAxisLabelVisible: false
+    rightAxisLabel: ''
+    smoothedBars: true
+    orientation: automatic
+    labelPosition: inline
+    percentType: total
+    percentPosition: inline
+    valuePosition: right
+    labelColorEnabled: false
+    labelColor: "#FFF"
+    isStepped: true
+    defaults_version: 1
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    listen: {}
+    row: 0
+    col: 16
     width: 8
     height: 6
   filters:
