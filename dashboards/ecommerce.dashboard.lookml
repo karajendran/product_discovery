@@ -213,7 +213,7 @@
     enable_conditional_formatting: false
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    custom_color: "#A8A116"
+    custom_color: "#7CB342"
     single_value_title: Purchase from search results
     defaults_version: 1
     listen:
@@ -319,7 +319,7 @@
     enable_conditional_formatting: false
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    custom_color: "#A8A116"
+    custom_color: "#7CB342"
     single_value_title: Total Sales generated from Searches
     defaults_version: 1
     listen:
