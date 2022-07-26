@@ -64,7 +64,13 @@ explore: mv_search {
 
 explore: mv_events_flat {}
 
-explore: mv_sales {}
+explore: mv_sales {
+  join: mv_search {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${mv_sales.day_date} = ${mv_search.day_date} and ${mv_sales.session}= ${mv_search.session} ;;
+  }
+}
 
 explore: mv_sessions_stats {}
 
