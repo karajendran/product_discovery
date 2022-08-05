@@ -3,90 +3,254 @@ view: tbl_events {
     ;;
 
   ##### PERIOD OVER PERIOD ANALYSIS ####
+##  Period over Period Method 3: Custom choice of current and previous periods with parameters
 
-  parameter: period {
-    label: "Timeframe"
-    view_label: "Period over Period"
-    type: unquoted
-    allowed_value: {
-      label: "Week to Date"
-      value: "Week"
+  # Like Method 2, but instead of using parameters to simply select the appropriate date dimension,
+  # we will use liquid to define the logic to pick out the correct periods for each selection.
+
+
+    filter: current_date_range {
+      type: date
+      view_label: "_PoP"
+      label: "1. Current Date Range"
+      description: "Select the current date range you are interested in. Make sure any other filter on Event Date covers this period, or is removed."
+      sql: ${period} IS NOT NULL ;;
     }
-    allowed_value: {
-      label: "Month to Date"
-      value: "Month"
+
+    parameter: compare_to {
+      view_label: "_PoP"
+      description: "Select the templated previous period you would like to compare to. Must be used with Current Date Range filter"
+      label: "2. Compare To:"
+      type: unquoted
+      allowed_value: {
+        label: "Previous Period"
+        value: "Period"
+      }
+      allowed_value: {
+        label: "Previous Week"
+        value: "Week"
+      }
+      allowed_value: {
+        label: "Previous Month"
+        value: "Month"
+      }
+      allowed_value: {
+        label: "Previous Quarter"
+        value: "Quarter"
+      }
+      allowed_value: {
+        label: "Previous Year"
+        value: "Year"
+      }
+      default_value: "Period"
     }
-    allowed_value: {
-      label: "Quarter to Date"
-      value: "Quarter"
+
+
+
+    ## ------------------ HIDDEN HELPER DIMENSIONS  ------------------ ##
+
+    dimension: days_in_period {
+      hidden:  yes
+      view_label: "_PoP"
+      description: "Gives the number of days in the current period date range"
+      type: number
+      sql: DATEDIFF(DAY, DATE({% date_start current_date_range %}), DATE({% date_end current_date_range %})) ;;
     }
-    allowed_value: {
-      label: "Year to Date"
-      value: "Year"
+
+    dimension: period_2_start {
+      hidden:  yes
+      view_label: "_PoP"
+      description: "Calculates the start of the previous period"
+      type: date
+      sql:
+            {% if compare_to._parameter_value == "Period" %}
+            DATE_ADD( DATE({% date_start current_date_range %}, INTERVAL -${days_in_period})
+            {% else %}
+            DATE_ADD(DATE({% date_start current_date_range %}, INTERVAL -1 {% parameter compare_to %}))
+            {% endif %};;
     }
-    default_value: "Period"
-  }
 
-  # To get start date we need to get either first day of the year, month or quarter
-  dimension: first_date_in_period {
-    view_label: "Period over Period"
-    datatype: date
-    type: date
-    hidden: no
-    sql: DATE_TRUNC(CURRENT_DATE(), {% parameter period %});;
-  }
+    dimension: period_2_end {
+      hidden:  yes
+      view_label: "_PoP"
+      description: "Calculates the end of the previous period"
+      type: date
+      sql:
+            {% if compare_to._parameter_value == "Period" %}
+            DATE_ADD(DATE({% date_start current_date_range %}, INTERVAL -1 DAYS ))
+            {% else %}
+            DATE_ADD({% parameter compare_to %}, -1, DATEADD(DATE({% date_end current_date_range %}, DAY, -1, )))
+            {% endif %};;
+    }
 
-  #Now get the total number of days in the period
-  dimension: days_in_period {
-    view_label: "Period over Period"
-    type: number
-    hidden: no
-    sql: DATE_DIFF(CURRENT_DATE(),${first_date_in_period}, DAY) ;;
-  }
+    dimension: day_in_period {
+      hidden: yes
+      description: "Gives the number of days since the start of each period. Use this to align the event dates onto the same axis, the axes will read 1,2,3, etc."
+      type: number
+      sql:
+        {% if current_date_range._is_filtered %}
+            CASE
+            WHEN {% condition current_date_range %} ${event_raw} {% endcondition %}
+            THEN DATEDIFF(DAY, DATE({% date_start current_date_range %}), ${event_raw}) + 1
+            WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
+            THEN DATEDIFF(DAY, ${period_2_start}, ${event_raw}) + 1
+            END
+        {% else %} NULL
+        {% endif %}
+        ;;
+    }
 
-  #Now get the first date in the prior period
-  dimension: first_date_in_prior_period {
-    view_label: "Period over Period"
-    datatype: date
-    type: date
-    hidden: no
-    sql: DATE_TRUNC(DATE_ADD(CURRENT_DATE(), INTERVAL -1 {% parameter period %}),{% parameter period %});;
-  }
+    dimension: order_for_period {
+      hidden: yes
+      type: number
+      sql:
+            {% if current_date_range._is_filtered %}
+                CASE
+                WHEN {% condition current_date_range %}  ${event_raw} {% endcondition %}
+                THEN 1
+                WHEN  ${event_raw}between ${period_2_start} and ${period_2_end}
+                THEN 2
+                END
+            {% else %}
+                NULL
+            {% endif %}
+            ;;
+    }
 
-  #Now get the last date in the prior period
-  dimension: last_date_in_prior_period {
-    datatype: date
-    view_label: "Period over Period"
-    type: date
-    hidden: no
-    sql: DATE_ADD(${first_date_in_prior_period}, INTERVAL ${days_in_period} DAY) ;;
-  }
+    ## ------- HIDING FIELDS  FROM ORIGINAL VIEW FILE  -------- ##
 
-  # Now figure out which period each date belongs in
-  dimension: period_selected {
-    view_label: "Period over Period"
-    type: string
-    sql:
-        CASE
-          WHEN ${event_date} >=  ${first_date_in_period}
-          THEN 'This {% parameter period %} to Date'
-          WHEN ${event_date} >= ${first_date_in_prior_period}
-          AND ${event_date} <= ${last_date_in_prior_period}
-          THEN 'Prior {% parameter period %} to Date'
-          ELSE NULL
-          END ;;
-  }
+    dimension_group: created {hidden: yes}
+    dimension: ytd_only {hidden:yes}
+    dimension: mtd_only {hidden:yes}
+    dimension: wtd_only {hidden:yes}
 
 
-  dimension: days_from_period_start {
-    view_label: "Period over Period"
-    type: number
-    sql: CASE WHEN ${period_selected} = 'This {% parameter period %} to Date'
-          THEN DATE_DIFF(${event_date}, ${first_date_in_period}, DAY)
-          WHEN ${period_selected} = 'Prior {% parameter period %} to Date'
-          THEN DATE_DIFF(${event_date}, ${first_date_in_prior_period}, DAY)
-          ELSE NULL END;;
-  }
+    ## ------------------ DIMENSIONS TO PLOT ------------------ ##
+
+    dimension_group: date_in_period {
+      description: "Use this as your grouping dimension when comparing periods. Aligns the previous periods onto the current period"
+      label: "Current Period"
+      type: time
+      sql: DATEADD(DAY, ${day_in_period} - 1, DATE({% date_start current_date_range %})) ;;
+      view_label: "_PoP"
+      timeframes: [
+        date,
+        hour_of_day,
+        day_of_week,
+        day_of_week_index,
+        day_of_month,
+        day_of_year,
+        week_of_year,
+        month,
+        month_name,
+        month_num,
+        year]
+    }
+
+
+    dimension: period {
+      view_label: "_PoP"
+      label: "Period"
+      description: "Pivot me! Returns the period the metric covers, i.e. either the 'This Period' or 'Previous Period'"
+      type: string
+      order_by_field: order_for_period
+      sql:
+            {% if current_date_range._is_filtered %}
+                CASE
+                WHEN {% condition current_date_range %}  ${event_raw}  {% endcondition %}
+                THEN 'This {% parameter compare_to %}'
+                WHEN ${event_date} between ${period_2_start} and ${period_2_end}
+                THEN 'Last {% parameter compare_to %}'
+                END
+            {% else %}
+                NULL
+            {% endif %}
+            ;;
+    }
+
+  # parameter: period {
+  #   label: "Timeframe"
+  #   view_label: "Period over Period"
+  #   type: unquoted
+  #   allowed_value: {
+  #     label: "Week to Date"
+  #     value: "Week"
+  #   }
+  #   allowed_value: {
+  #     label: "Month to Date"
+  #     value: "Month"
+  #   }
+  #   allowed_value: {
+  #     label: "Quarter to Date"
+  #     value: "Quarter"
+  #   }
+  #   allowed_value: {
+  #     label: "Year to Date"
+  #     value: "Year"
+  #   }
+  #   default_value: "Period"
+  # }
+
+  # # To get start date we need to get either first day of the year, month or quarter
+  # dimension: first_date_in_period {
+  #   view_label: "Period over Period"
+  #   datatype: date
+  #   type: date
+  #   hidden: no
+  #   sql: DATE_TRUNC(CURRENT_DATE(), {% parameter period %});;
+  # }
+
+  # #Now get the total number of days in the period
+  # dimension: days_in_period {
+  #   view_label: "Period over Period"
+  #   type: number
+  #   hidden: no
+  #   sql: DATE_DIFF(CURRENT_DATE(),${first_date_in_period}, DAY) ;;
+  # }
+
+  # #Now get the first date in the prior period
+  # dimension: first_date_in_prior_period {
+  #   view_label: "Period over Period"
+  #   datatype: date
+  #   type: date
+  #   hidden: no
+  #   sql: DATE_TRUNC(DATE_ADD(CURRENT_DATE(), INTERVAL -1 {% parameter period %}),{% parameter period %});;
+  # }
+
+  # #Now get the last date in the prior period
+  # dimension: last_date_in_prior_period {
+  #   datatype: date
+  #   view_label: "Period over Period"
+  #   type: date
+  #   hidden: no
+  #   sql: DATE_ADD(${first_date_in_prior_period}, INTERVAL ${days_in_period} DAY) ;;
+  # }
+
+  # # Now figure out which period each date belongs in
+  # dimension: period_selected {
+  #   view_label: "Period over Period"
+  #   type: string
+  #   sql:
+  #       CASE
+  #         WHEN ${event_date} >=  ${first_date_in_period}
+  #         THEN 'This {% parameter period %} to Date'
+  #         WHEN ${event_date} >= ${first_date_in_prior_period}
+  #         AND ${event_date} <= ${last_date_in_prior_period}
+  #         THEN 'Prior {% parameter period %} to Date'
+  #         ELSE NULL
+  #         END ;;
+  # }
+
+
+  # dimension: days_from_period_start {
+  #   view_label: "Period over Period"
+  #   type: number
+  #   sql: CASE WHEN ${period_selected} = 'This {% parameter period %} to Date'
+  #         THEN DATE_DIFF(${event_date}, ${first_date_in_period}, DAY)
+  #         WHEN ${period_selected} = 'Prior {% parameter period %} to Date'
+  #         THEN DATE_DIFF(${event_date}, ${first_date_in_prior_period}, DAY)
+  #         ELSE NULL END;;
+  # }
 
   ##### DIMENSIONS ####
 

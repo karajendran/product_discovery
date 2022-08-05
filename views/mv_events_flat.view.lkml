@@ -21,6 +21,17 @@ view: mv_events_flat {
     sql: ${TABLE}.event_type ;;
   }
 
+  dimension: event_type_sort {
+    # hidden: yes
+    type: string
+    sql: CASE WHEN ${event_type} = 'search' THEN 1
+              WHEN ${event_type} = 'detail-page-view' THEN 2
+              WHEN ${event_type} = 'add-to-cart' THEN 3
+              WHEN ${event_type} = 'purchase-complete' THEN 4
+              ELSE 5 END
+              ;;
+  }
+
   dimension: session {
     type: string
     sql: ${TABLE}.session ;;
