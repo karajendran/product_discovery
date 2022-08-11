@@ -27,14 +27,15 @@ view: search_to_sales {
     fields: [day, search_to_sales_session]
   }
   measure: search_to_sales_count {
-    type: number
-    sql: count(${search_to_sales_session}) ;;
+    type: count_distinct
+    sql: ${search_to_sales_session} ;;
   }
 
   measure: total_search_sessions {
     type:  number
     sql: select count(*) from `retail.mv_search`;;
   }
+
   #Total Transaction
   measure: total_sales {
     type: sum
