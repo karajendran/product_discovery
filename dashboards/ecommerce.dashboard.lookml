@@ -219,7 +219,7 @@
     listen:
       Time Filter: search_to_sales.day
     row: 6
-    col: 8
+    col: 16
     width: 8
     height: 6
   - title: Add to cart rate
@@ -246,7 +246,7 @@
     series_types: {}
     listen:
       Time Filter: search_to_add_to_cart.day
-    row: 12
+    row: 18
     col: 8
     width: 8
     height: 6
@@ -274,7 +274,7 @@
     defaults_version: 1
     listen:
       Time Filter: search_to_detail_page_view.day
-    row: 12
+    row: 18
     col: 16
     width: 8
     height: 6
@@ -300,7 +300,7 @@
     listen:
       Time Filter: mv_search.day_date
     row: 12
-    col: 0
+    col: 16
     width: 8
     height: 6
   - title: Total Sales generated from Searches
@@ -371,8 +371,8 @@
     defaults_version: 1
     listen:
       Time Filter: mv_search.day_date
-    row: 0
-    col: 16
+    row: 12
+    col: 0
     width: 8
     height: 6
   - title: Top products shown as a result of searches
@@ -448,7 +448,92 @@
     series_types: {}
     listen:
       Time Filter: mv_search.day_date
+    row: 12
+    col: 8
+    width: 8
+    height: 6
+  - title: Total Revenue
+    name: Total Revenue
+    model: product_discovery_v1
+    explore: mv_sales
+    type: single_value
+    fields: [mv_sales.day_year, mv_sales.total_sales]
+    fill_fields: [mv_sales.day_year]
+    filters: {}
+    sorts: [mv_sales.day_year desc]
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: progress_percentage
+    comparison_reverse_colors: false
+    show_comparison_label: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#079c98"
+    single_value_title: Total Revenue
+    comparison_label: ''
+    defaults_version: 1
+    listen:
+      Time Filter: mv_sales.day_date
     row: 6
+    col: 8
+    width: 8
+    height: 6
+  - title: Total Conversion
+    name: Total Conversion
+    model: product_discovery_v1
+    explore: tbl_events
+    type: looker_column
+    fields: [tbl_events.event_type_new, tbl_events.count]
+    filters:
+      tbl_events.event_type_new: ''
+    sorts: [tbl_events.event_type_new]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: true
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: left, series: [{axisId: tbl_events.count, id: tbl_events.count,
+            name: Event Count}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, tickDensityCustom: 5, type: linear}]
+    x_axis_label: Event
+    limit_displayed_rows_values:
+      show_hide: hide
+      first_last: first
+      num_rows: 0
+    hide_legend: false
+    series_labels:
+      tbl_events.count: Event Count
+    show_dropoff: true
+    defaults_version: 1
+    listen:
+      Time Filter: tbl_events.event_date
+    row: 0
     col: 16
     width: 8
     height: 6
