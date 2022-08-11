@@ -275,12 +275,17 @@ view: tbl_events {
 
   dimension: event_type_new {
     type: string
-    sql: CASE WHEN ${event_type} = 'detail-page-view' THEN 'Product View'
-              WHEN ${event_type} =  'search' THEN 'Product Search'
+    sql: CASE WHEN ${event_type} = 'detail-page-view' THEN 'Event2_DetailPageView'
+              WHEN ${event_type} =  'search' THEN 'Event1_Search'
+              WHEN ${event_type} =  'add-to-cart' THEN 'Event3_AddToCart'
+              WHEN ${event_type} =  'purchase-complete' THEN 'Event4_Purchase'
               ELSE 'Other'
               END;;
   }
 
+  dimension: total_no_of_searches {
+
+  }
   dimension: product_details {
     hidden: yes
     sql: ${TABLE}.product_details ;;
