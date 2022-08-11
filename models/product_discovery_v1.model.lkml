@@ -64,6 +64,22 @@ explore: mv_search {
 
 explore: mv_events_flat {}
 
+# explore: events {
+#   join: mv_sales {}
+#   join: mv_search {}
+#   join: mv_add_to_cart {}
+# }
+
+# view: sessions {SELECT DATE(DAY) as DAY, SESSION_ID, ....}
+
+# explore: sessions {
+#   join: mv_sales {}
+#   join: mv_search {}
+#   join: mv_add_to_cart {}
+# }
+
+
+
 explore: mv_sales {
   join: mv_search {
     type: left_outer
