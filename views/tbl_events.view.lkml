@@ -192,10 +192,10 @@ view: tbl_events {
 
   dimension: event_type_new {
     type: string
-    sql: CASE WHEN ${event_type} = 'detail-page-view' THEN 'Event2_DetailPageView'
-              WHEN ${event_type} =  'search' THEN 'Event1_Search'
-              WHEN ${event_type} =  'add-to-cart' THEN 'Event3_AddToCart'
-              WHEN ${event_type} =  'purchase-complete' THEN 'Event4_Purchase'
+    sql: CASE WHEN ${event_type} =  'search' THEN '1_Search'
+              WHEN ${event_type} = 'detail-page-view' THEN '2_DetailPageView'
+              WHEN ${event_type} =  'add-to-cart' THEN '3_AddToCart'
+              WHEN ${event_type} =  'purchase-complete' THEN '4_Purchase'
               ELSE 'Other'
               END;;
   }
