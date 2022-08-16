@@ -92,13 +92,13 @@ explore: mv_sessions_stats {}
 
 explore: mv_add_to_cart {}
 
-explore: mv_add_to_cart_v2 {
-  join: mv_add_to_cart_v2__categories {
-    view_label: "Mv Add To Cart V2: Categories"
-    sql: LEFT JOIN UNNEST(${mv_add_to_cart_v2.categories}) as mv_add_to_cart_v2__categories ;;
-    relationship: one_to_many
-  }
-}
+#explore: mv_add_to_cart_v2 {
+#  join: mv_add_to_cart_v2__categories {
+#    view_label: "Mv Add To Cart V2: Categories"
+#    sql: LEFT JOIN UNNEST(${mv_add_to_cart_v2.categories}) as mv_add_to_cart_v2__categories ;;
+#    relationship: one_to_many
+#  }
+#}
 
 explore: mv_detail_page_view {}
 
@@ -171,29 +171,13 @@ explore: tbl_products {
 #P0: 3 - Most Searched Products
 explore: most_searched_product {}
 
-explore: most_searched_product_category {}
-
-explore: most_searched_product_ids {}
-
-
 #P0: 4 - Most Viewed Products
 explore: most_viewed_product{}
-
-explore: most_viewed_product_category {}
-
-explore: most_viewed_product_ids {}
-
-
-# explore: prod_map {}
 
 
 #P0: 6 - Best & Worst Performing Products
 explore: best_performing_product{}
 
-#P0: 8 - Abandonment rate
-explore: abandonment_rate {}
-
-explore: test{}
 
 #sales forecast
 explore: sales_forecast {}
