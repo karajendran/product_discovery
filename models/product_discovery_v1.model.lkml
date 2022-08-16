@@ -107,6 +107,18 @@ explore: tbl_products {
   group_label: "Products"
   view_label: "Products"
 
+  join: best_performing_product {
+    type: inner
+    relationship: one_to_many
+    sql_on: ${tbl_products.id} = ${best_performing_product.sku} ;;
+  }
+
+  join: mv_detail_page_view {
+    type: inner
+    relationship: one_to_many
+    sql_on: ${tbl_products.id} = ${mv_detail_page_view.prd_id} ;;
+  }
+
   join: most_viewed_product {
     type: left_outer
     relationship: one_to_many

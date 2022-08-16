@@ -13,7 +13,7 @@
     model: product_discovery_v1
     explore: most_searched_product
     type: looker_pie
-    fields: [most_searched_product.sku, most_searched_product.title, most_searched_product.view_count]
+    fields: [most_searched_product.sku, most_searched_product.title, most_searched_product.search_count]
     sorts: [most_searched_product.view_count desc]
     limit: 50
     value_labels: legend

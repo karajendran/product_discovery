@@ -27,7 +27,7 @@ view: most_viewed_product {
     sql: ${TABLE}.title ;;
   }
   measure: count {
-    hidden: yes
+    hidden: no
     type: count
     drill_fields: [detail*]
   }
@@ -38,6 +38,6 @@ view: most_viewed_product {
   }
 
   set: detail {
-    fields: [sku,title,view_count]
+    fields: [sku,title]
   }
 }
