@@ -60,6 +60,24 @@ explore: mv_search {
     sql: LEFT JOIN UNNEST(${mv_search.results}) as mv_search__results ;;
     relationship: one_to_many
   }
+  join: mv_detail_page_view {
+    view_label: "Search to Detail Page View"
+    type: left_outer
+    sql_on: ${mv_search.day_date} = ${mv_detail_page_view.day_date} and ${mv_search.session} =${mv_detail_page_view.session} ;;
+    relationship: one_to_many
+  }
+  join: mv_add_to_cart {
+    view_label: "Search to Add to Cart"
+    type: left_outer
+    sql_on: ${mv_search.day_date}=${mv_add_to_cart.day_date} and ${mv_search.session}=${mv_add_to_cart.session} ;;
+    relationship: one_to_many
+  }
+  join: mv_sales {
+    view_label: "Search to Purchase"
+    type: left_outer
+    sql_on: ${mv_search.day_date}=${mv_sales.day_date} and ${mv_search.session}=${mv_sales.session} ;;
+    relationship: one_to_many
+  }
 }
 
 explore: mv_events_flat {}

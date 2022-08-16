@@ -58,6 +58,6 @@ view: mv_add_to_cart {
 
   measure: count {
     type: count
-    drill_fields: []
+    drill_fields: [session,day_date]
   }
 }

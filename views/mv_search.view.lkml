@@ -223,7 +223,7 @@ view: mv_search {
 
   measure: count {
     type: count
-    drill_fields: []
+    drill_fields: [session, day_date]
   }
 }
 

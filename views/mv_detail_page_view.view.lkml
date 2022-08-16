@@ -53,6 +53,6 @@ view: mv_detail_page_view {
 
   measure: count {
     type: count
-    drill_fields: []
+    drill_fields: [session, day_date]
   }
 }
