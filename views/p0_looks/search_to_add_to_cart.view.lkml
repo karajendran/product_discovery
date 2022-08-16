@@ -2,8 +2,8 @@
 view: search_to_add_to_cart {
   derived_table: {
     sql: SELECT (mv_add_to_cart.day),mv_add_to_cart.session
-      FROM `retail.mv_search` AS mv_search , `retail.mv_add_to_cart` AS mv_add_to_cart
-      Where (mv_add_to_cart.day)=(mv_search.day ) and mv_add_to_cart.session = mv_search.session
+      FROM search_to_detail_page_view AS view , `retail.mv_add_to_cart` AS mv_add_to_cart
+      Where mv_add_to_cart.day)=(view.day ) and mv_add_to_cart.session = view.session
        ;;
   }
   measure:  search_to_add_cart_count {

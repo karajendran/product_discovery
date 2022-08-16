@@ -1,5 +1,5 @@
 view: mv_detail_page_view {
-  sql_table_name: `retail.mv_detail_page_view`
+  sql_table_name: `retail.mv_detail_page_view_new`
     ;;
 
   dimension_group: day {

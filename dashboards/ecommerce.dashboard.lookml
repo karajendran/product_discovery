@@ -9,61 +9,6 @@
   refresh: 1 hour
   preferred_slug: ZLhCDVTxY6JDzOPusXX5xP
   elements:
-  - title: Total Number of Searches
-    name: Total Number of Searches
-    model: product_discovery_v1
-    explore: tbl_events
-    type: single_value
-    fields: [tbl_events.event_type, tbl_events.count]
-    filters:
-      tbl_events.event_type: search
-    sorts: [tbl_events.count desc]
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    custom_color: "#079c98"
-    single_value_title: Total Number of Searches
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    defaults_version: 1
-    series_types: {}
-    listen:
-      Time Filter: tbl_events.event_date
-    row: 0
-    col: 8
-    width: 8
-    height: 6
   - title: Total Sessions
     name: Total Sessions
     model: product_discovery_v1
@@ -195,89 +140,6 @@
     col: 0
     width: 8
     height: 6
-  - title: Conversion rate
-    name: Conversion rate
-    model: product_discovery_v1
-    explore: search_to_sales
-    type: single_value
-    fields: [search_to_sales.search_to_sales_count]
-    filters: {}
-    limit: 500
-    column_limit: 50
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    custom_color: "#7CB342"
-    single_value_title: Purchase from search results
-    defaults_version: 1
-    listen:
-      Time Filter: search_to_sales.day
-    row: 6
-    col: 16
-    width: 8
-    height: 6
-  - title: Add to cart rate
-    name: Add to cart rate
-    model: product_discovery_v1
-    explore: search_to_add_to_cart
-    type: single_value
-    fields: [search_to_add_to_cart.search_to_add_cart_count]
-    filters: {}
-    limit: 1000
-    column_limit: 50
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    custom_color: "#A8A116"
-    single_value_title: Add-to-cart events occurring from Search results
-    defaults_version: 1
-    series_types: {}
-    listen:
-      Time Filter: search_to_add_to_cart.day
-    row: 18
-    col: 8
-    width: 8
-    height: 6
-  - title: Click-through rate
-    name: Click-through rate
-    model: product_discovery_v1
-    explore: search_to_detail_page_view
-    type: single_value
-    fields: [search_to_detail_page_view.search_to_detail_page_view_count]
-    filters: {}
-    limit: 500
-    column_limit: 50
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    custom_color: "#A8A116"
-    single_value_title: Number of clicks from Search results
-    series_types: {}
-    defaults_version: 1
-    listen:
-      Time Filter: search_to_detail_page_view.day
-    row: 18
-    col: 16
-    width: 8
-    height: 6
   - title: Total Visitors (searchers)
     name: Total Visitors (searchers)
     model: product_discovery_v1
@@ -300,7 +162,7 @@
     listen:
       Time Filter: mv_search.day_date
     row: 12
-    col: 16
+    col: 8
     width: 8
     height: 6
   - title: Total Sales generated from Searches
@@ -324,8 +186,8 @@
     defaults_version: 1
     listen:
       Time Filter: search_to_sales.day
-    row: 6
-    col: 0
+    row: 0
+    col: 16
     width: 8
     height: 6
   - title: Top search terms
@@ -371,7 +233,7 @@
     defaults_version: 1
     listen:
       Time Filter: mv_search.day_date
-    row: 12
+    row: 18
     col: 0
     width: 8
     height: 6
@@ -448,7 +310,7 @@
     series_types: {}
     listen:
       Time Filter: mv_search.day_date
-    row: 12
+    row: 18
     col: 8
     width: 8
     height: 6
@@ -478,7 +340,7 @@
     defaults_version: 1
     listen:
       Time Filter: mv_sales.day_date
-    row: 6
+    row: 0
     col: 8
     width: 8
     height: 6
@@ -533,8 +395,235 @@
     defaults_version: 1
     listen:
       Time Filter: tbl_events.event_date
-    row: 0
+    row: 24
+    col: 0
+    width: 8
+    height: 6
+  - title: Number of Detail page views from Search
+    name: Number of Detail page views from Search
+    model: product_discovery_v1
+    explore: mv_search
+    type: single_value
+    fields: [mv_search.day_date, mv_search.count, mv_detail_page_view.session]
+    sorts: [mv_search.day_date desc]
+    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: 'sum(${mv_search.count})',
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}]
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#1A73E8"
+    single_value_title: Number of Detail page views from Search
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [mv_search.day_date, mv_detail_page_view.session, mv_search.count]
+    listen:
+      Time Filter: mv_search.day_date
+    row: 6
+    col: 8
+    width: 8
+    height: 6
+  - title: Number of Add-To-Cart from Search
+    name: Number of Add-To-Cart from Search
+    model: product_discovery_v1
+    explore: mv_search
+    type: single_value
+    fields: [mv_search.day_date, mv_search.count, mv_add_to_cart.session]
+    sorts: [mv_search.day_date desc]
+    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: 'sum(${mv_search.count})',
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}]
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#1A73E8"
+    single_value_title: Number of Add-To-Cart from Search
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [mv_search.day_date, mv_search.count]
+    listen:
+      Time Filter: mv_search.day_date
+    row: 6
     col: 16
+    width: 8
+    height: 6
+  - title: Number of purchases from Search
+    name: Number of purchases from Search
+    model: product_discovery_v1
+    explore: mv_search
+    type: single_value
+    fields: [mv_search.day_date, mv_search.count, mv_sales.session]
+    sorts: [mv_search.day_date desc]
+    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: 'sum(${mv_search.count})',
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}]
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#1A73E8"
+    single_value_title: Number of purchases from Search
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [mv_search.day_date, mv_search.count]
+    listen:
+      Time Filter: mv_search.day_date
+    row: 12
+    col: 0
+    width: 8
+    height: 6
+  - title: Number of Searches
+    name: Number of Searches
+    model: product_discovery_v1
+    explore: mv_search
+    type: single_value
+    fields: [mv_search.count]
+    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: 'sum(${mv_search.count})',
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}]
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#1A73E8"
+    single_value_title: Number of Searches
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [mv_search.count]
+    listen:
+      Time Filter: mv_search.day_date
+    row: 6
+    col: 0
     width: 8
     height: 6
   filters:

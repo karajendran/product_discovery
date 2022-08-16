@@ -62,25 +62,34 @@ explore: mv_search {
   }
   join: mv_detail_page_view {
     view_label: "Search to Detail Page View"
-    type: left_outer
+    type: inner
     sql_on: ${mv_search.day_date} = ${mv_detail_page_view.day_date} and ${mv_search.session} =${mv_detail_page_view.session} ;;
-    relationship: one_to_many
+    relationship: many_to_one
   }
   join: mv_add_to_cart {
     view_label: "Search to Add to Cart"
-    type: left_outer
+    type: inner
     sql_on: ${mv_search.day_date}=${mv_add_to_cart.day_date} and ${mv_search.session}=${mv_add_to_cart.session} ;;
-    relationship: one_to_many
+    relationship: many_to_one
   }
   join: mv_sales {
     view_label: "Search to Purchase"
-    type: left_outer
+    type: inner
     sql_on: ${mv_search.day_date}=${mv_sales.day_date} and ${mv_search.session}=${mv_sales.session} ;;
-    relationship: one_to_many
+    relationship: many_to_one
   }
 }
 
 explore: mv_events_flat {}
+
+#explore: mv_add_to_cart_v2 {
+#  join: mv_add_to_cart_v2__categories {
+#    view_label: "Mv Add To Cart V2: Categories"
+#    sql: LEFT JOIN UNNEST(${mv_add_to_cart_v2.categories}) as mv_add_to_cart_v2__categories ;;
+#    relationship: one_to_many
+#  }
+#}
+
 
 # explore: events {
 #   join: mv_sales {}
@@ -96,30 +105,34 @@ explore: mv_events_flat {}
 #   join: mv_add_to_cart {}
 # }
 
+explore: mv_sessions_stats {}
 
-
-explore: mv_sales {
+explore: mv_detail_page_view {
   join: mv_search {
+    view_label: "Search to Detail Page View"
     type: left_outer
-    relationship: one_to_one
-    sql_on: ${mv_sales.day_date} = ${mv_search.day_date} and ${mv_sales.session}= ${mv_search.session} ;;
+    sql_on: ${mv_search.day_date} = ${mv_detail_page_view.day_date} and ${mv_search.session} =${mv_detail_page_view.session} ;;
+    relationship: one_to_many
   }
 }
 
-explore: mv_sessions_stats {}
+explore: mv_add_to_cart {
+  join: mv_detail_page_view {
+    view_label: "Search to Add to Cart"
+    type: left_outer
+    sql_on: ${mv_add_to_cart.day_date} = ${mv_detail_page_view.day_date} and ${mv_add_to_cart.session} =${mv_detail_page_view.session} ;;
+    relationship: one_to_many
+  }
+}
+explore: mv_sales {
+  join: mv_add_to_cart {
+    view_label: "Search to Add to Cart"
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${mv_sales.day_date} = ${mv_add_to_cart.day_date} and ${mv_sales.session}= ${mv_add_to_cart.session} ;;
+  }
 
-explore: mv_add_to_cart {}
-
-#explore: mv_add_to_cart_v2 {
-#  join: mv_add_to_cart_v2__categories {
-#    view_label: "Mv Add To Cart V2: Categories"
-#    sql: LEFT JOIN UNNEST(${mv_add_to_cart_v2.categories}) as mv_add_to_cart_v2__categories ;;
-#    relationship: one_to_many
-#  }
-#}
-
-explore: mv_detail_page_view {}
-
+}
 explore: tbl_products {
   label: "Products"
   group_label: "Products"
