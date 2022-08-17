@@ -1,4 +1,4 @@
-- dashboard: Sales
+- dashboard: Sales_Old
   title: Sales & Conversions
   layout: newspaper
   preferred_viewer: dashboards-next

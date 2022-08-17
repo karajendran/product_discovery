@@ -1,5 +1,5 @@
-- dashboard: sales__conversions_new
-  title: Sales & Conversions New
+- dashboard: sales__conversions
+  title: Sales & Conversions
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
@@ -38,10 +38,10 @@
     listen:
       Current Date Range: mv_sales.current_date_range
       'Compare To:': mv_sales.compare_to
-    row:
-    col:
-    width:
-    height:
+    row: 0
+    col: 0
+    width: 8
+    height: 6
   - title: AOV
     name: AOV
     model: product_discovery_v1
@@ -80,10 +80,10 @@
     listen:
       Current Date Range: mv_sales.current_date_range
       'Compare To:': mv_sales.compare_to
-    row:
-    col:
-    width:
-    height:
+    row: 0
+    col: 8
+    width: 8
+    height: 6
   - title: AOS
     name: AOS
     model: product_discovery_v1
@@ -114,10 +114,10 @@
     listen:
       Current Date Range: mv_sales.current_date_range
       'Compare To:': mv_sales.compare_to
-    row:
-    col:
-    width:
-    height:
+    row: 0
+    col: 16
+    width: 8
+    height: 6
   - title: Total Number Of Purchases
     name: Total Number Of Purchases
     model: product_discovery_v1
@@ -147,10 +147,10 @@
     listen:
       Current Date Range: mv_sales.current_date_range
       'Compare To:': mv_sales.compare_to
-    row:
-    col:
-    width:
-    height:
+    row: 6
+    col: 0
+    width: 8
+    height: 6
   - title: Total Customers who purchased
     name: Total Customers who purchased
     model: product_discovery_v1
@@ -183,10 +183,10 @@
     listen:
       Current Date Range: mv_sales.current_date_range
       'Compare To:': mv_sales.compare_to
-    row:
-    col:
-    width:
-    height:
+    row: 6
+    col: 8
+    width: 8
+    height: 6
   - title: Total Conversion/Abandonment Rate
     name: Total Conversion/Abandonment Rate
     model: product_discovery_v1
@@ -240,10 +240,10 @@
     show_dropoff: true
     defaults_version: 1
     listen: {}
-    row:
-    col:
-    width:
-    height:
+    row: 12
+    col: 0
+    width: 8
+    height: 6
   - title: Total Revenue Breakdown
     name: Total Revenue Breakdown
     model: product_discovery_v1
@@ -326,10 +326,10 @@
     listen:
       Current Date Range: mv_sales.current_date_range
       'Compare To:': mv_sales.compare_to
-    row:
-    col:
-    width:
-    height:
+    row: 6
+    col: 16
+    width: 8
+    height: 6
   - title: Sales Forecast
     name: Sales Forecast
     model: product_discovery_v1
@@ -378,10 +378,10 @@
     series_types: {}
     defaults_version: 1
     listen: {}
-    row:
-    col:
-    width:
-    height:
+    row: 12
+    col: 8
+    width: 8
+    height: 6
   filters:
   - name: Current Date Range
     title: 1. Current Date Range
@@ -392,6 +392,7 @@
     ui_config:
       type: advanced
       display: popover
+      options: []
     model: product_discovery_v1
     explore: mv_sales
     listens_to_filters: []
