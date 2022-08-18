@@ -55,8 +55,12 @@ explore: events {
 }
 
 explore: mv_search {
+  label: "Search"
+  group_label: "Search"
+  view_label: "Search"
+
   join: mv_search__results {
-    view_label: "Mv Search: Results"
+    view_label: "Search: Results"
     sql: LEFT JOIN UNNEST(${mv_search.results}) as mv_search__results ;;
     relationship: one_to_many
   }
