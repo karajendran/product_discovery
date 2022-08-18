@@ -243,7 +243,7 @@ view: mv_sales {
 
   measure: count {
     type: count
-    drill_fields: []
+    drill_fields: [session,day_date]
   }
 
   measure: shipping_and_discount {
